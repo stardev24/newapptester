@@ -6,7 +6,7 @@ class SuggestionsList extends Component {
 
 		return(
 				<div>
-
+					<p>List view for GM</p>
 					
 				</div>
 

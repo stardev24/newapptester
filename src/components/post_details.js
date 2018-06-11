@@ -1,8 +1,8 @@
 import React,{Component} from 'react'
-import {Button,Row,Input} from 'react-materialize'
-import MySubmissions from "./mysubmissions"
+import {Button, Icon,Row,Input} from 'react-materialize'
 
-class FormSubmission extends Component {
+
+class PostDetails extends Component {
 	  constructor(props) {
 	    super(props);
 	  }
@@ -30,9 +30,7 @@ class FormSubmission extends Component {
 						<Button waves='light' className="right">Submit</Button>
 					</Row>
 				</div>
-				<div className="col s6 right">
-					<MySubmissions />
-				</div>
+
 			</div>
 			)
 	}
@@ -40,4 +38,4 @@ class FormSubmission extends Component {
 }
 
 
-export default FormSubmission  
+export default PostDetails

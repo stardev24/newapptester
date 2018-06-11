@@ -7,15 +7,15 @@ class Navbar extends Component {
 		return(
 				<div>
 				  <nav>
-				    <div class="nav-wrapper">
-				    <ul class="left hide-on-med-and-down">
+				    <div className="nav-wrapper">
+				    <ul className="left hide-on-med-and-down">
 				    <li>
-				      <a href="#!" class="brand-logo left"><i class="material-icons">cloud</i>GM Central</a>
+				      <a href="#!" className="brand-logo left"><i className="material-icons">cloud</i>GM Central</a>
 				    </li>
 				    </ul>
-				      <ul class="right hide-on-med-and-down">
+				      <ul className="right hide-on-med-and-down">
 				      	<li>Welcome user</li>
-				        <li><i class="material-icons">more_vert</i></li>
+				        <li><i className="material-icons">more_vert</i></li>
 				      </ul>
 				    </div>
 				  </nav>				
