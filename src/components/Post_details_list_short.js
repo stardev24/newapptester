@@ -4,7 +4,7 @@ import { FetchPostsData,baseURL} from "../action/userpostActions"
 import {Button} from 'react-materialize'
 
 
-class GMListView extends Component {
+class PostDetailsShortFormat extends Component {
 	
 
 
@@ -28,19 +28,21 @@ class GMListView extends Component {
 			   <div>
 				      	<div className="row">
 				      	<div className="col s12 border">
-					        <span className="col s4">Author</span>
-					        <span className="col s4">Status</span>
-					        <span className="col s4">Details</span>
+					        <span className="col s4">Subject</span>
+					        <span className="col s3">Status</span>
+					        <span className="col s3">Status</span>
+					        <span className="col s2">Details</span>
 				        </div>
 				        </div>
-
+				        	
 
 				      {this.state && this.state.postsData && this.state.postsData.map(item =>
 				      	<div className="row">
 				      	<div className="col s12 border">
-					        <span className="col s4">{item.author}</span>
-					        <span className="col s4">{item.status}</span>
-					        <span className="col s4"><Button className="test">Show More</Button></span>
+					        <span className="col s4">{item.subject}</span>
+					        <span className="col s3">{item.status}</span>
+					        <span className="col s3">{item.createdDate}</span>
+					        <span className="col s2"><Button className="test">More..</Button></span>
 				        </div>
 				        </div>
 				      )}
@@ -66,4 +68,4 @@ const mapStateToProps = (state) => {
         };
     };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GMListView);
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetailsShortFormat);

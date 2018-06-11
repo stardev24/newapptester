@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import GMListView from "./GM_post_list"
+import PostDetailsShortFormat from "./Post_details_list_short"
 
 
 class MySubmissions extends Component {
@@ -7,9 +7,9 @@ class MySubmissions extends Component {
 
 		return(
 				<div>
-					<p>List view for User Submissions</p>
+					<h5>My Submissions</h5>
 
-					<GMListView />
+					<PostDetailsShortFormat />
 					
 				</div>
 
