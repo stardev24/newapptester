@@ -36,8 +36,8 @@ class PostDetailsShortFormat extends Component {
 				        </div>
 				        	
 
-				      {this.state && this.state.postsData && this.state.postsData.map(item =>
-				      	<div className="row">
+				      {this.state && this.state.postsData && this.state.postsData.map((item,index) =>
+				      	<div className="row" key={index}>
 				      	<div className="col s12 border">
 					        <span className="col s4">{item.subject}</span>
 					        <span className="col s3">{item.status}</span>
