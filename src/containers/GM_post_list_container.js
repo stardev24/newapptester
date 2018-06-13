@@ -1,18 +1,21 @@
 import { connect } from 'react-redux';
 import React,{Component} from 'react'
 import { FetchPostsData,baseURL} from "../action/userpostActions"
-import {Button} from 'react-materialize'
-import Navbar from "./navbar"
+import {Button,Row} from 'react-materialize'
+import Navbar from "../components/navbar"
+import GMSelectedListItemView from "../components/GM_selected_listitem"
+import SelectDisplayPanel from "../components/select_display_panel"
 
-class GMListView extends Component {
+class GMListContainer extends Component {
 	
 
 
 	  constructor(props) {
 	    super(props);
 	    this.state = {url:"https://api.mlab.com/api/1/databases/notification/collections/suggestions?apiKey=lnns9ZsrNRgq7odDP7WSAeFqwaToPRFl",
-					  postsData:[]}
+					  postsData:[],selectedRecord:null,selectedIndex:null}
 		this.handleSelect = this.handleSelect.bind(this)
+		this.selectListRecord = this.selectListRecord.bind(this)
 	  }
 
 	  componentDidMount() {
@@ -28,19 +31,24 @@ class GMListView extends Component {
 	  	console.log("----event data----",itemData.target.getAttribute("value"))
 	  }
 	  
+	selectListRecord(recordId){
+
+
+		      const record = this.props.posts.find(recordItem => recordItem._id.$oid === recordId)
+		      this.setState({selectedRecord: record}) 			
+
+	}  
 
 	render(){
 		return(
 			   <div>
 
 			   		  <Navbar />
-				      {this.state && this.state.postsData && this.state.postsData.map((item,index) =>
-				      	<div className="row" key={index}>
-				      	<div className="col s4 border">
-					        <span value={item} className="col s10 smallbox" onClick={(item)=>this.handleSelect(item)} >{item.subject}</span>
-				        </div>
-				        </div>
-				      )}
+			   		  <div className="row">
+				   		  <GMSelectedListItemView records={this.state.postsData} selectListRecord={this.selectListRecord}/>
+				   		  <SelectDisplayPanel selectedPost={this.state.selectedRecord} />
+			   		  </div>
+
 				    
 				</div>
 			)
@@ -51,7 +59,7 @@ class GMListView extends Component {
 const mapStateToProps = (state) => {
 	console.log("------->",state)
 	return {
-	    posts: state.posts,
+	    posts: state.postsData,
 	    isLoading:state.postsAreLoading,
 	    isError:state.postsHaveError
 	};
@@ -63,4 +71,4 @@ const mapStateToProps = (state) => {
         };
     };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GMListView);
+export default connect(mapStateToProps, mapDispatchToProps)(GMListContainer);
