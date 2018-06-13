@@ -2,3 +2,28 @@
 	border: 1px thin grey;
 	margin:20px 0px 0px 0px;
 }
+
+#toast-container {
+  top: auto !important;
+  left: auto !important;
+  bottom: 10%;
+  left:7%;
+  background-color: white;
+}
+.toast{
+	background-color: white !important;
+    color: black !important;
+}
+
+thick {
+    font-weight: bold;
+}
+
+.box{
+	background-color: black;
+	height: 800px
+}
+.smallbox{
+	height: 30px;
+	background-color: #f1f1f1;
+}

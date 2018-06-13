@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React,{Component} from 'react'
 import { FetchPostsData,baseURL} from "../action/userpostActions"
 import {Button} from 'react-materialize'
-
+import Navbar from "./navbar"
 
 class GMListView extends Component {
 	
@@ -12,6 +12,7 @@ class GMListView extends Component {
 	    super(props);
 	    this.state = {url:"https://api.mlab.com/api/1/databases/notification/collections/suggestions?apiKey=lnns9ZsrNRgq7odDP7WSAeFqwaToPRFl",
 					  postsData:[]}
+		this.handleSelect = this.handleSelect.bind(this)
 	  }
 
 	  componentDidMount() {
@@ -22,25 +23,21 @@ class GMListView extends Component {
 	  	})
 	
 	  }
+	  
+	  handleSelect(itemData){
+	  	console.log("----event data----",itemData.target.getAttribute("value"))
+	  }
+	  
 
 	render(){
 		return(
 			   <div>
-				      	<div className="row">
-				      	<div className="col s12 border">
-					        <span className="col s4">Author</span>
-					        <span className="col s4">Status</span>
-					        <span className="col s4">Details</span>
-				        </div>
-				        </div>
 
-
-				      {this.state && this.state.postsData && this.state.postsData.map(item =>
-				      	<div className="row">
-				      	<div className="col s12 border">
-					        <span className="col s4">{item.author}</span>
-					        <span className="col s4">{item.status}</span>
-					        <span className="col s4"><Button className="test">Show More</Button></span>
+			   		  <Navbar />
+				      {this.state && this.state.postsData && this.state.postsData.map((item,index) =>
+				      	<div className="row" key={index}>
+				      	<div className="col s4 border">
+					        <span value={item} className="col s10 smallbox" onClick={(item)=>this.handleSelect(item)} >{item.subject}</span>
 				        </div>
 				        </div>
 				      )}

@@ -7,10 +7,7 @@ class MySubmissions extends Component {
 
 		return(
 				<div>
-					<h5>My Submissions</h5>
-
 					<PostDetailsShortFormat />
-					
 				</div>
 
 			)

@@ -27,3 +27,13 @@ export function postsData(state = [], action) {
             return state;
     }
 }
+
+export function singlepostData(state = [], action) {
+    switch (action.type) {
+        case 'POST_FETCH_DATA_SUCCESS':
+            return action.post;
+
+        default:
+            return state;
+    }
+}

@@ -22,6 +22,13 @@ import axios from 'axios'
         };
     }
 
+    export function singlePostDataSuccess(post) {
+        return {
+            type: 'POST_FETCH_DATA_SUCCESS',
+            post
+        };
+    }
+
 	export function FetchPostsData(url) {
 	    return (dispatch) => {
 	        dispatch(postsAreLoading(true));
@@ -40,3 +47,23 @@ import axios from 'axios'
 	            .catch(() => dispatch(postsHaveError(true)));
 	    };
 	}
+
+    export function FetchSinglePost(url) {
+        return (dispatch) => {
+            dispatch(postsAreLoading(true));
+
+            return axios.get(url)
+                .then((response) => {
+                    if (response.status !== 200) {
+                        throw Error(response.statusText);
+                    }
+
+                    dispatch(postsAreLoading(false));
+
+                    return response;
+                })
+                .then((response) => dispatch(singlePostDataSuccess(response.data)))
+                .catch(() => dispatch(postsHaveError(true)));
+        };
+    }
+

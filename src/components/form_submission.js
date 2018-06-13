@@ -1,16 +1,17 @@
 import React,{Component} from 'react'
-import {Button,Row,Input} from 'react-materialize'
+import {Button,Row,Input,Toast} from 'react-materialize'
 import MySubmissions from "./mysubmissions"
-import { Field, reduxForm } from 'redux-form'
+import {Materialize} from 'materialize-css'
 
 class FormSubmission extends Component {
 	  constructor(props) {
 	    super(props);
+	    this.state = {"userSubmissionFlag":false}
 	    this.handleSubmit = this.handleSubmit.bind(this)
 	  }
 
 	  componentDidMount() {
-
+	  	console.log("----->in form componentDidMount -->",this)
 	  }
 
 	  handleSubmit(e) {
@@ -21,9 +22,17 @@ class FormSubmission extends Component {
 	      formData[field] = this.refs[field].state.value;
 	    }
 	    console.log('-->', formData);
+
+	    window.Materialize.toast("Your post was sent successfully", 4000,"",() => {
+	    	console.log("calling after toast --->")
+	    	this.setState({"userSubmissionFlag":true})
+
+	    })
+	     
 	  }
 
 	render(){
+		const MySubmissionsList = this.state.userSubmissionFlag ? (<MySubmissions /> ) : (<MySubmissions /> )
 		return(
 			   <div className="border">
 			   <h5>Create Grievance</h5>
@@ -55,9 +64,12 @@ class FormSubmission extends Component {
 							<Button waves='light' className="right">Submit</Button>
 						</Row>
 					</form>
+					
 				</div>
 				<div className="col s6 right">
-					<MySubmissions />
+				
+					{MySubmissionsList}
+					
 				</div>
 			</div>
 			)
