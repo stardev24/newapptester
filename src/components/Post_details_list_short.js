@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React,{Component} from 'react'
-import { FetchPostsData,baseURL} from "../action/userpostActions"
-import {Button} from 'react-materialize'
+import { FetchPostsData} from "../action/userpostActions"
+import {ProgressBar} from 'react-materialize'
 
 
 class PostDetailsShortFormat extends Component {
@@ -16,8 +16,6 @@ class PostDetailsShortFormat extends Component {
 
 	  componentDidMount() {
 	  	this.props.fetchData(this.state.url).then((data) => {
-	  		console.log("----state----",this.state)
-	  		console.log("----props----",this.props)
 	  		this.setState({postsData:data.posts})
 	  	})
 	
@@ -52,17 +50,7 @@ class PostDetailsShortFormat extends Component {
 				)
 		}else{
 			return(
-				  <div className="preloader-wrapper small active">
-				    <div className="spinner-layer spinner-green-only">
-				      <div className="circle-clipper left">
-				        <div className="circle"></div>
-				      </div><div className="gap-patch">
-				        <div className="circle"></div>
-				      </div><div className="circle-clipper right">
-				        <div className="circle"></div>
-				      </div>
-				    </div>
-				  </div>
+					<ProgressBar />
 				)
 		}
 
@@ -71,7 +59,7 @@ class PostDetailsShortFormat extends Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log("------->",state)
+
 	return {
 	    posts: state.posts,
 	    isLoading:state.postsAreLoading,

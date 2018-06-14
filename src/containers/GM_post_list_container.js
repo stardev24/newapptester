@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React,{Component} from 'react'
-import { FetchPostsData,baseURL} from "../action/userpostActions"
-import {Button,Row} from 'react-materialize'
+import { FetchPostsData} from "../action/userpostActions"
+
 import Navbar from "../components/navbar"
 import GMSelectedListItemView from "../components/GM_selected_listitem"
 import SelectDisplayPanel from "../components/select_display_panel"
@@ -13,29 +13,22 @@ class GMListContainer extends Component {
 	  constructor(props) {
 	    super(props);
 	    this.state = {url:"https://api.mlab.com/api/1/databases/notification/collections/suggestions?apiKey=lnns9ZsrNRgq7odDP7WSAeFqwaToPRFl",
-					  postsData:[],selectedRecord:null,selectedIndex:null}
-		this.handleSelect = this.handleSelect.bind(this)
+					  postsData:[],selectedRecord:null,selectedIndex:null,defaultPost:null,defaultIndex:0}
 		this.selectListRecord = this.selectListRecord.bind(this)
 	  }
 
 	  componentDidMount() {
 	  	this.props.fetchData(this.state.url).then((data) => {
-	  		console.log("----state----",this.state)
-	  		console.log("----props----",this.props)
-	  		this.setState({postsData:data.posts})
+	  		this.setState({postsData:data.posts,defaultPost:data.posts[0]})
 	  	})
 	
 	  }
 	  
-	  handleSelect(itemData){
-	  	console.log("----event data----",itemData.target.getAttribute("value"))
-	  }
-	  
-	selectListRecord(recordId){
+	selectListRecord(recordId,listItemId){
 
 
 		      const record = this.props.posts.find(recordItem => recordItem._id.$oid === recordId)
-		      this.setState({selectedRecord: record}) 			
+		      this.setState({selectedRecord: record,selectedIndex:listItemId}) 			
 
 	}  
 
@@ -45,8 +38,14 @@ class GMListContainer extends Component {
 
 			   		  <Navbar />
 			   		  <div className="row">
-				   		  <GMSelectedListItemView records={this.state.postsData} selectListRecord={this.selectListRecord}/>
-				   		  <SelectDisplayPanel selectedPost={this.state.selectedRecord} />
+
+				   		  <GMSelectedListItemView 
+				   		  records={this.state.postsData} 
+				   		  selectListRecord={this.selectListRecord} 
+				   		  activeTabId={this.state.selectedIndex ? this.state.selectedIndex : this.state.defaultIndex}/>
+
+				   		  <SelectDisplayPanel 
+				   		  selectedPost={this.state.selectedRecord ? this.state.selectedRecord : this.state.defaultPost} />
 			   		  </div>
 
 				    
@@ -57,7 +56,7 @@ class GMListContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log("------->",state)
+
 	return {
 	    posts: state.postsData,
 	    isLoading:state.postsAreLoading,

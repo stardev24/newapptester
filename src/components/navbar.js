@@ -10,7 +10,7 @@ class Navbar extends Component {
 				    <div className="nav-wrapper">
 				    <ul className="left hide-on-med-and-down">
 				    <li>
-				      <a href="#!" className="brand-logo left"><i className="material-icons">cloud</i>GM Central</a>
+				      <a href="#!" className="brand-logo left">AppInfo</a>
 				    </li>
 				    </ul>
 				      <ul className="right hide-on-med-and-down">

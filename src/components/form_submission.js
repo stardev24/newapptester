@@ -1,18 +1,28 @@
 import React,{Component} from 'react'
-import {Button,Row,Input,Toast} from 'react-materialize'
+import {Button,Row,Input} from 'react-materialize'
 import MySubmissions from "./mysubmissions"
-import {Materialize} from 'materialize-css'
-
+import Switch from 'react-toggle-switch'
+import "../../node_modules/react-toggle-switch/dist/css/switch.min.css" 
 class FormSubmission extends Component {
 	  constructor(props) {
 	    super(props);
-	    this.state = {"userSubmissionFlag":false}
+	    this.state = {"userSubmissionFlag":false,"switched": false,"switchText":"Non Anonymous"}
 	    this.handleSubmit = this.handleSubmit.bind(this)
 	  }
 
 	  componentDidMount() {
-	  	console.log("----->in form componentDidMount -->",this)
+	  	//For future reference
 	  }
+	  toggleSwitch = () => {
+	    this.setState(prevState => {
+	   		const switchTxtState = prevState.switchText === "Anonymous" ? "Non Anonymous" : "Anonymous"
+	      return {
+	        switched: !prevState.switched,
+	        switchText:switchTxtState
+
+	      };
+	    });
+	  };
 
 	  handleSubmit(e) {
 	    e.preventDefault();
@@ -21,10 +31,10 @@ class FormSubmission extends Component {
 	    for (const field in this.refs) {
 	      formData[field] = this.refs[field].state.value;
 	    }
+	    formData.userstatus = this.state.switchText
 	    console.log('-->', formData);
 
 	    window.Materialize.toast("Your post was sent successfully", 4000,"",() => {
-	    	console.log("calling after toast --->")
 	    	this.setState({"userSubmissionFlag":true})
 
 	    })
@@ -35,11 +45,11 @@ class FormSubmission extends Component {
 		const MySubmissionsList = this.state.userSubmissionFlag ? (<MySubmissions /> ) : (<MySubmissions /> )
 		return(
 			   <div className="border">
-			   <h5>Create Grievance</h5>
-				<div className="col s6 border">
-					<form onSubmit={this.handleSubmit}>
+
+				<div className="col s6 border collapsible">
+					<form className="adjust" onSubmit={this.handleSubmit}>
 						<Row>
-						  <Input s={10} type='select' label="Category" defaultValue='2' ref="category">
+						  <Input s={10} type='select' label="Category" defaultValue='' ref="category">
 						    <option value='Facility'>Facility</option>
 						    <option value='Admin'>Admin</option>
 						    <option value='L & D'>L & D</option>
@@ -56,8 +66,9 @@ class FormSubmission extends Component {
 							<Input type='textarea' label="Description" placeholder="Enter Description" s={10} ref="description"/>
 						</Row>
 						<Row>
-								<Input name='usertype' type='radio' value='Anonymous' label='Anonymous' ref="anonymous"/>
-							    <Input name='usertype' type='radio' value='Non Anonymous' label='Non Anonymous' ref="nonanonymous"/>
+
+								<Switch onClick={this.toggleSwitch} on={this.state.switched}/>
+								<span>{this.state.switchText}</span>
 	    						
 						</Row>
 						<Row>
@@ -66,7 +77,7 @@ class FormSubmission extends Component {
 					</form>
 					
 				</div>
-				<div className="col s6 right">
+				<div className="col s6 right collapsible">
 				
 					{MySubmissionsList}
 					

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Link,Switch } from "react-router-dom";
+import { BrowserRouter, Route,Switch } from "react-router-dom";
 import GMListContainer from "../containers/GM_post_list_container"
 import LandingPage from "../components/landingpage"
 import PostDetailsPage from "../components/postDetailsPage"

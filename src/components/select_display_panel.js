@@ -1,11 +1,9 @@
 import React,{Component} from 'react'
-import {Row} from 'react-materialize'
+import {Row,ProgressBar} from 'react-materialize'
 
 class SelectDisplayPanel extends Component {
-	constructor(props){
-		super(props)
-		console.log("in SelectDisplayPanel --->",this.props)
-	}
+
+
 
 	render(){
 		const panelFlag = this.props.selectedPost ? true : false
@@ -37,7 +35,7 @@ class SelectDisplayPanel extends Component {
 			return(
 
 					<div className="col s8">
-						<p>No panel to display</p>
+						<ProgressBar />
 					</div>
 
 				)

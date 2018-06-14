@@ -27,3 +27,15 @@ thick {
 	height: 30px;
 	background-color: #f1f1f1;
 }
+.active{
+	cursor: pointer;
+}
+.nonactive{
+	cursor: pointer;
+}
+.static_box{
+	padding: 20px 20px 20px 20px;
+}
+.adjust{
+	padding: 30px 10px 10px 10px;
+}
